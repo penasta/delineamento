@@ -1,0 +1,137 @@
+---
+title: ''
+author: ''
+date: ''
+output:
+  pdf_document: null
+  fig_crop: no
+  html_document:
+    df_print: paged
+subtitle: ''
+highlight: tango
+number_sections: no
+fig_caption: yes
+keep_tex: yes
+includes:
+  in_header: Estilo.sty
+classoption: a4paper
+always_allow_html: yes
+---
+  
+  
+\begin{center}
+{\Large
+  DEPARTAMENTO DE ESTATÍSTICA} \\
+\vspace{0.5cm}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=9cm, keepaspectratio]{logo-UnB.eps}
+\end{figure}
+\vskip 1em
+{\large
+  `r format(Sys.time(), '%d %B %Y')`}
+\vskip 3em
+{\LARGE
+  \textbf{Aula 10/04}} \\
+\vskip 1em
+{\Large
+  Profª. Juliana Betini} \\
+\vskip 1em
+{\Large
+  Delineamento e Análise de experimentos} \\
+\vskip 1em
+{\Large
+  Aluno: Bruno Gondim Toledo | Matrícula: 15/0167636} \\
+\vskip 1em
+\end{center}
+
+\vskip 5em
+
+# Exercício 1: Uma engenheira está interessada em investigar a relação entre a configuração de potência de rádio frequência (RF) e a taxa de gravação para esta ferramenta. O objetivo de um experimento como este é modelar a relação entre a taxa de gravação e a potência de RF e especificar a configuração de potência que dará uma taxa de gravação desejada. Ela está interessada em um determinado gás (C2F6) e uma abertura de 0,80cm para testar quatro níveis de potência de RF: 160, 180, 200 e 220 W. Ela decidiu testar cinco placas em cada nível de potência de RF. Suponha que a engenheira execute o experimento de forma aleatória. As observações que ela obteve sobre a taxa de gravação são mostradas na Tabela 1.
+
+```{r setup, include=FALSE}
+
+um <- c(575,565,600,725)
+dois <- c(542,593,651,700)
+tres <- c(530,590,610,715)
+quatro <- c(539,579,637,685)
+cinco <- c(570,610,629,710)
+potencia <- c(160,180,200,220)
+total <- c(2756,2937,3127,3535)
+potencia <- factor(potencia)
+
+obs <- c(um,dois,tres,quatro,cinco)
+
+library(pacman)
+p_load(tidyverse,knitr)
+
+df <- data.frame(potencia,um,dois,tres,quatro,cinco,total)
+
+colnames(df) <- c("potencia","1","2","3","4","5","total")
+
+rm(um,dois,tres,quatro,cinco,potencia,total)
+
+```
+
+## Tabela 1: Dados de taxa de gravação (em A/min) do experimento de gravação com plasma
+
+```{r q1, echo=F}
+
+kable(df)
+
+```
+
+\newpage
+
+### 1.1) Quais são as hipíteses de interesse?
+
+$$h_0: \tau_1 = \tau_2 = \tau_3 = \tau_4 $$
+
+$$h_1: \exists \ \tau_i \neq \tau_j \ ; \ i \neq j$$
+
+$$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
+
+### 1.2) Calcule a estatística do teste e o p-valor usando os resultados encontrados na aula teórica e usando o *software* **R**
+
+$$ SQ_{Total} = \sum_i^a\sum_j^n(y_{ij}-\bar{y})^2 $$
+
+```{r q12, echo=F}
+
+N <- length(obs)
+media <- mean(obs)
+SQT <- sum((obs-media)^2)
+
+a <- length(unique(df$potencia))
+n <- N/a
+
+#mediatrat <- tapply(obs,df$potencia,mean)
+
+df2 <- df %>%
+  select(potencia,total) %>%
+  group_by(potencia) %>%
+  summarise(media_trat = total/5) %>%
+  mutate(media_geral = media) %>%
+  mutate(SQTrat = n*(sum((media_trat-media_geral)^2)))
+
+df <- left_join(df,df2,by="potencia")
+
+```
+
+
+### 1.3) Os pressupostos necessários foram atendidos?
+
+Calculando resíduos
+
+$$ e_{ij} = y_{ij} - \hat{y}_{ij} $$
+
+
+```{r}
+
+#df2$residuos <- (df$total/5)
+
+#shapiro.test(residuos)
+
+```
+
+
+### 1.4) Qual sua conclusão sobre os resultados encontrados?
