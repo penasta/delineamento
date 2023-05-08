@@ -1,0 +1,379 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  a4paper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{center}
+{\Large
+  DEPARTAMENTO DE ESTATÍSTICA} \\
+\vspace{0.5cm}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=9cm, keepaspectratio]{logo-UnB.eps}
+\end{figure}
+\vskip 1em
+{\large
+  17 abril 2023}
+\vskip 3em
+{\LARGE
+  \textbf{Lista 1}} \\
+\vskip 1em
+{\Large
+  Profª. Juliana Betini} \\
+\vskip 1em
+{\Large
+  Delineamento e Análise de experimentos} \\
+\vskip 1em
+{\Large
+  Aluno: Bruno Gondim Toledo | Matrícula: 15/0167636} \\
+\vskip 1em
+\end{center}
+
+\vskip 5em
+
+\hypertarget{exercuxedcio-1-uma-engenheira-estuxe1-interessada-em-investigar-a-relauxe7uxe3o-entre-a-configurauxe7uxe3o-de-potuxeancia-de-ruxe1dio-frequuxeancia-rf-e-a-taxa-de-gravauxe7uxe3o-para-esta-ferramenta.-o-objetivo-de-um-experimento-como-este-uxe9-modelar-a-relauxe7uxe3o-entre-a-taxa-de-gravauxe7uxe3o-e-a-potuxeancia-de-rf-e-especificar-a-configurauxe7uxe3o-de-potuxeancia-que-daruxe1-uma-taxa-de-gravauxe7uxe3o-desejada.-ela-estuxe1-interessada-em-um-determinado-guxe1s-c2f6-e-uma-abertura-de-080cm-para-testar-quatro-nuxedveis-de-potuxeancia-de-rf-160-180-200-e-220-w.-ela-decidiu-testar-cinco-placas-em-cada-nuxedvel-de-potuxeancia-de-rf.-suponha-que-a-engenheira-execute-o-experimento-de-forma-aleatuxf3ria.-as-observauxe7uxf5es-que-ela-obteve-sobre-a-taxa-de-gravauxe7uxe3o-suxe3o-mostradas-na-tabela-1.}{%
+\section{Exercício 1: Uma engenheira está interessada em investigar a
+relação entre a configuração de potência de rádio frequência (RF) e a
+taxa de gravação para esta ferramenta. O objetivo de um experimento como
+este é modelar a relação entre a taxa de gravação e a potência de RF e
+especificar a configuração de potência que dará uma taxa de gravação
+desejada. Ela está interessada em um determinado gás (C2F6) e uma
+abertura de 0,80cm para testar quatro níveis de potência de RF: 160,
+180, 200 e 220 W. Ela decidiu testar cinco placas em cada nível de
+potência de RF. Suponha que a engenheira execute o experimento de forma
+aleatória. As observações que ela obteve sobre a taxa de gravação são
+mostradas na Tabela
+1.}\label{exercuxedcio-1-uma-engenheira-estuxe1-interessada-em-investigar-a-relauxe7uxe3o-entre-a-configurauxe7uxe3o-de-potuxeancia-de-ruxe1dio-frequuxeancia-rf-e-a-taxa-de-gravauxe7uxe3o-para-esta-ferramenta.-o-objetivo-de-um-experimento-como-este-uxe9-modelar-a-relauxe7uxe3o-entre-a-taxa-de-gravauxe7uxe3o-e-a-potuxeancia-de-rf-e-especificar-a-configurauxe7uxe3o-de-potuxeancia-que-daruxe1-uma-taxa-de-gravauxe7uxe3o-desejada.-ela-estuxe1-interessada-em-um-determinado-guxe1s-c2f6-e-uma-abertura-de-080cm-para-testar-quatro-nuxedveis-de-potuxeancia-de-rf-160-180-200-e-220-w.-ela-decidiu-testar-cinco-placas-em-cada-nuxedvel-de-potuxeancia-de-rf.-suponha-que-a-engenheira-execute-o-experimento-de-forma-aleatuxf3ria.-as-observauxe7uxf5es-que-ela-obteve-sobre-a-taxa-de-gravauxe7uxe3o-suxe3o-mostradas-na-tabela-1.}}
+
+\hypertarget{tabela-1-dados-de-taxa-de-gravauxe7uxe3o-em-amin-do-experimento-de-gravauxe7uxe3o-com-plasma}{%
+\subsection{Tabela 1: Dados de taxa de gravação (em A/min) do
+experimento de gravação com
+plasma}\label{tabela-1-dados-de-taxa-de-gravauxe7uxe3o-em-amin-do-experimento-de-gravauxe7uxe3o-com-plasma}}
+
+\begin{longtable}[]{@{}lrrrrrr@{}}
+\toprule()
+potencia & 1 & 2 & 3 & 4 & 5 & total \\
+\midrule()
+\endhead
+160 & 575 & 542 & 530 & 539 & 570 & 2756 \\
+180 & 565 & 593 & 590 & 579 & 610 & 2937 \\
+200 & 600 & 651 & 610 & 637 & 629 & 3127 \\
+220 & 725 & 700 & 715 & 685 & 710 & 3535 \\
+\bottomrule()
+\end{longtable}
+
+\newpage
+
+\hypertarget{quais-suxe3o-as-hipuxedteses-de-interesse}{%
+\subsubsection{1.1) Quais são as hipíteses de
+interesse?}\label{quais-suxe3o-as-hipuxedteses-de-interesse}}
+
+\[h_0: \tau_1 = \tau_2 = \tau_3 = \tau_4 \]
+
+\[h_1: \exists \ \tau_i \neq \tau_j \ ; \ i \neq j\]
+
+\[y_{ij} = \mu + \tau_i + \epsilon_{ij}\]
+
+\hypertarget{calcule-a-estatuxedstica-do-teste-e-o-p-valor-usando-os-resultados-encontrados-na-aula-teuxf3rica-e-usando-o-software-r}{%
+\subsubsection{\texorpdfstring{1.2) Calcule a estatística do teste e o
+p-valor usando os resultados encontrados na aula teórica e usando o
+\emph{software}
+\textbf{R}}{1.2) Calcule a estatística do teste e o p-valor usando os resultados encontrados na aula teórica e usando o software R}}\label{calcule-a-estatuxedstica-do-teste-e-o-p-valor-usando-os-resultados-encontrados-na-aula-teuxf3rica-e-usando-o-software-r}}
+
+\[ SQ_{Total} = \sum_i^a\sum_j^n(y_{ij}-\bar{y})^2 \]
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule()
+& Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
+\midrule()
+\endhead
+potencia & 3 & 66870.55 & 22290.18 & 66.79707 & 0 \\
+Residuals & 16 & 5339.20 & 333.70 & NA & NA \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{os-pressupostos-necessuxe1rios-foram-atendidos}{%
+\subsubsection{1.3) Os pressupostos necessários foram
+atendidos?}\label{os-pressupostos-necessuxe1rios-foram-atendidos}}
+
+Calculando resíduos
+
+\[ e_{ij} = y_{ij} - \hat{y}_{ij} \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_residuos }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mtrat =}\NormalTok{ total}\SpecialCharTok{/}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}}\NormalTok{,}\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}}\NormalTok{,}\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}}\NormalTok{,}\StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}}\NormalTok{,}\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}}\NormalTok{),}
+               \AttributeTok{values\_to =} \StringTok{\textquotesingle{}obs\textquotesingle{}}\NormalTok{,}\AttributeTok{names\_to=}\StringTok{\textquotesingle{}rep\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{residuo =}\NormalTok{ obs}\SpecialCharTok{{-}}\NormalTok{mtrat)}
+
+\CommentTok{\#shapiro.test(df2$obs)}
+\FunctionTok{shapiro.test}\NormalTok{(df\_residuos}\SpecialCharTok{$}\NormalTok{residuo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  df_residuos$residuo
+## W = 0.93752, p-value = 0.2152
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#qqplot(x=500:750,y=df2$obs)}
+\CommentTok{\#qqplot(x=0:100,y=df\_residuos$residuo)}
+
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{y=}\NormalTok{df\_residuos}\SpecialCharTok{$}\NormalTok{obs,}
+     \AttributeTok{x=}\NormalTok{df\_residuos}\SpecialCharTok{$}\NormalTok{residuo)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{aula_10_04_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot(df2$obs)}
+
+\FunctionTok{qqnorm}\NormalTok{(df\_residuos}\SpecialCharTok{$}\NormalTok{residuo)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{aula_10_04_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#qqline(df\_residuos$residuo)}
+
+\FunctionTok{leveneTest}\NormalTok{(}\AttributeTok{y =}\NormalTok{ df\_residuos}\SpecialCharTok{$}\NormalTok{obs,}
+           \AttributeTok{group =}\NormalTok{ df\_residuos}\SpecialCharTok{$}\NormalTok{potencia,}
+           \AttributeTok{data=}\NormalTok{df\_residuos)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Levene's Test for Homogeneity of Variance (center = median: df_residuos)
+##       Df F value Pr(>F)
+## group  3  0.1959 0.8977
+##       16
+\end{verbatim}
+
+Gráfico resíduo por valor ajustado
+
+Se normal: Teste de Bartlett
+
+Se não-normal: Teste de Levene
+
+\hypertarget{qual-sua-conclusuxe3o-sobre-os-resultados-encontrados}{%
+\subsubsection{1.4) Qual sua conclusão sobre os resultados
+encontrados?}\label{qual-sua-conclusuxe3o-sobre-os-resultados-encontrados}}
+
+\hypertarget{qual-a-proporuxe7uxe3o-da-variauxe7uxe3o-total-explicada-pelo-modelo-ajustado-no-item-1.2}{%
+\subsubsection{1.5) Qual a proporção da variação total explicada pelo
+modelo ajustado no item
+1.2?}\label{qual-a-proporuxe7uxe3o-da-variauxe7uxe3o-total-explicada-pelo-modelo-ajustado-no-item-1.2}}
+
+\[r^2 = \frac{SQ_{tratamentos}}{SQ_{total}}\]
+
+0.9260598
+
+\hypertarget{se-a-hipuxf3tese-nula-for-rejeita-quais-potuxeancias-de-ruxe1dio-frequuxeancia-diferem-entre-si-apresente-as-hipuxf3teses-que-seruxe3o-testadas-e-a-estatuxedstica-do-teste}{%
+\subsubsection{1.6) Se a hipótese nula for rejeita, quais potências de
+rádio frequência diferem entre si? Apresente as hipóteses que serão
+testadas e a estatística do
+teste}\label{se-a-hipuxf3tese-nula-for-rejeita-quais-potuxeancias-de-ruxe1dio-frequuxeancia-diferem-entre-si-apresente-as-hipuxf3teses-que-seruxe3o-testadas-e-a-estatuxedstica-do-teste}}
+
+Teste de Fisher, teste de Tuckey
+
+\begin{verbatim}
+## [1] 551.2
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 587.4
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 625.4
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 707
+\end{verbatim}
+
+\begin{verbatim}
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = obs ~ potencia, data = df2)
+## 
+## $potencia
+##          diff        lwr       upr     p adj
+## 180-160  36.2   3.145624  69.25438 0.0294279
+## 200-160  74.2  41.145624 107.25438 0.0000455
+## 220-160 155.8 122.745624 188.85438 0.0000000
+## 200-180  38.0   4.945624  71.05438 0.0215995
+## 220-180 119.6  86.545624 152.65438 0.0000001
+## 220-200  81.6  48.545624 114.65438 0.0000146
+\end{verbatim}
+
+\hypertarget{considere-que-antes-de-realizar-o-experimento-a-engenheira-tinha-a-suposiuxe7uxe3o-de-diferenuxe7a-entre-as-potuxeancias-mais-baixas-e-as-potuxeancias-mais-altas.-construa-um-conjunto-de-contrastes-ortogonais-a-partir-dessa-informauxe7uxe3o.-apresente-as-hipuxf3teses-que-seruxe3o-testadas-as-conclusuxf5es-e-a-estatuxedstica-de-teste-considerada.}{%
+\subsubsection{1.7) Considere que antes de realizar o experimento, a
+engenheira tinha a suposição de diferença entre as potências mais baixas
+e as potências mais altas. Construa um conjunto de contrastes ortogonais
+a partir dessa informação. Apresente as hipóteses que serão testadas, as
+conclusões e a estatística de teste
+considerada.}\label{considere-que-antes-de-realizar-o-experimento-a-engenheira-tinha-a-suposiuxe7uxe3o-de-diferenuxe7a-entre-as-potuxeancias-mais-baixas-e-as-potuxeancias-mais-altas.-construa-um-conjunto-de-contrastes-ortogonais-a-partir-dessa-informauxe7uxe3o.-apresente-as-hipuxf3teses-que-seruxe3o-testadas-as-conclusuxf5es-e-a-estatuxedstica-de-teste-considerada.}}
+
+\[C_1 \begin{cases}
+            H_0 : \mu_1 + \mu_2 - \mu_3 - \mu_4 = 0 \\
+            H_1 : \mu_1 + \mu_2 - \mu_3 - \mu_4 \neq 0
+        \end{cases}\]
+
+\[C_2 \begin{cases}
+            H_0 : \mu_1 - \mu_2 = 0 \\
+            H_1 : \mu_1 - \mu_2 \neq 0
+        \end{cases}\]
+
+\[C_3 \begin{cases}
+            H_0 : \mu_3 - \mu_4 = 0 \\
+            H_1 : \mu_3 - \mu_4 \neq 0
+        \end{cases}\]
+
+Para cada \(c_i\), calcular a estatística de teste
+
+\[t_0 = \frac{\sum_{i=1}^ac_i\bar{y}_{i.}}{\frac{QM_{res}}{n}\sum_{i=1}^ac_i^2}\]
+
+\hypertarget{calcule-a-probabilidade-do-erro-tipo-ii-para}{%
+\subsubsection{1.8) Calcule a probabilidade do erro tipo II
+para:}\label{calcule-a-probabilidade-do-erro-tipo-ii-para}}
+
+\[\mu_1 = 575;\\ \mu_2 = 600;\\ \mu_3 = 650;\\ \mu_4 = 675;  \ e \\ \sigma = 25.\]
+
+\[\begin{cases}
+Erro \ tipo \ I  &: P(Rejeitar \ H_0         &| H_0 \ verdadeira)\\
+Erro \ tipo \ II &: P(Não \ rejeitar \ H_0 \ &| H_0 \ falso)\\
+\end{cases}\]
+
+\hypertarget{qual-deve-ser-o-nuxfamero-de-repetiuxe7uxf5es-no-experimento-para-que-o-erro-seja-menor-que-0.01}{%
+\subsubsection{1.9) Qual deve ser o número de repetições no experimento
+para que o erro seja menor que
+0.01\%?}\label{qual-deve-ser-o-nuxfamero-de-repetiuxe7uxf5es-no-experimento-para-que-o-erro-seja-menor-que-0.01}}
+
+\end{document}

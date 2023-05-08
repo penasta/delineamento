@@ -32,7 +32,7 @@ always_allow_html: yes
   `r format(Sys.time(), '%d %B %Y')`}
 \vskip 3em
 {\LARGE
-  \textbf{Aula 10/04}} \\
+  \textbf{Lista 1}} \\
 \vskip 1em
 {\Large
   Profª. Juliana Betini} \\
@@ -63,13 +63,11 @@ potencia <- factor(potencia)
 obs <- c(um,dois,tres,quatro,cinco)
 
 library(pacman)
-p_load(tidyverse,knitr)
+p_load(tidyverse,knitr,car)
 
 df <- data.frame(potencia,um,dois,tres,quatro,cinco,total)
 
 colnames(df) <- c("potencia","1","2","3","4","5","total")
-
-rm(um,dois,tres,quatro,cinco,potencia,total)
 
 ```
 
@@ -97,23 +95,17 @@ $$ SQ_{Total} = \sum_i^a\sum_j^n(y_{ij}-\bar{y})^2 $$
 
 ```{r q12, echo=F}
 
-N <- length(obs)
-media <- mean(obs)
-SQT <- sum((obs-media)^2)
-
-a <- length(unique(df$potencia))
-n <- N/a
-
-#mediatrat <- tapply(obs,df$potencia,mean)
-
 df2 <- df %>%
-  select(potencia,total) %>%
-  group_by(potencia) %>%
-  summarise(media_trat = total/5) %>%
-  mutate(media_geral = media) %>%
-  mutate(SQTrat = n*(sum((media_trat-media_geral)^2)))
+  pivot_longer(cols = c(`1`,`2`,`3`,`4`,`5`),
+               values_to = 'obs',names_to='rep') %>%
+  select(1,4)
 
-df <- left_join(df,df2,by="potencia")
+anova <- aov(obs ~ potencia, data=df2)
+tabela <- summary(anova)[[1]]
+
+kable(tabela)
+
+rm(tabela)
 
 ```
 
@@ -127,11 +119,147 @@ $$ e_{ij} = y_{ij} - \hat{y}_{ij} $$
 
 ```{r}
 
-#df2$residuos <- (df$total/5)
+df_residuos <- df %>%
+  mutate(mtrat = total/5) %>%
+    pivot_longer(cols = c(`1`,`2`,`3`,`4`,`5`),
+               values_to = 'obs',names_to='rep') %>%
+  select(1,3,5) %>%
+  mutate(residuo = obs-mtrat)
 
-#shapiro.test(residuos)
+#shapiro.test(df2$obs)
+shapiro.test(df_residuos$residuo)
+
+#qqplot(x=500:750,y=df2$obs)
+#qqplot(x=0:100,y=df_residuos$residuo)
+
+plot(y=df_residuos$obs,
+     x=df_residuos$residuo)
+#plot(df2$obs)
+
+qqnorm(df_residuos$residuo)
+#qqline(df_residuos$residuo)
+
+leveneTest(y = df_residuos$obs,
+           group = df_residuos$potencia,
+           data=df_residuos)
+
+
+
+```
+
+Gráfico resíduo por valor ajustado
+
+Se normal:
+Teste de Bartlett
+
+Se não-normal:
+Teste de Levene
+
+
+### 1.4) Qual sua conclusão sobre os resultados encontrados?
+
+### 1.5) Qual a proporção da variação total explicada pelo modelo ajustado no item 1.2?
+
+$$r^2 = \frac{SQ_{tratamentos}}{SQ_{total}}$$
+
+```{r q15, echo=F}
+
+r2 <- summary(anova)[[1]][[1,2]] / (summary(anova)[[1]][[1,2]]+summary(anova)[[1]][2,2])
+
+# r2 <- 66870.55/(66870.55+5339.2)
+# r2
+
+```
+
+`r r2`
+
+### 1.6) Se a hipótese nula for rejeita, quais potências de rádio frequência diferem entre si? Apresente as hipóteses que serão testadas e a estatística do teste
+
+Teste de Fisher, teste de Tuckey
+
+```{r q16, echo=F}
+# Fisher
+
+df$total[1]/5
+df$total[2]/5
+df$total[3]/5
+df$total[4]/5
+
+num <-(df$total[4]/5) - (df$total[1]/5)
+den <- sqrt((333.7*(2/5)))
+
+# num/den
+
+# Tukey
+
+TukeyHSD(anova)
+
+```
+
+### 1.7) Considere que antes de realizar o experimento, a engenheira tinha a suposição de diferença entre as potências mais baixas e as potências mais altas. Construa um conjunto de contrastes ortogonais a partir dessa informação. Apresente as hipóteses que serão testadas, as conclusões e a estatística de teste considerada.
+
+$$C_1 \begin{cases}
+            H_0 : \mu_1 + \mu_2 - \mu_3 - \mu_4 = 0 \\
+            H_1 : \mu_1 + \mu_2 - \mu_3 - \mu_4 \neq 0
+        \end{cases}$$
+    
+$$C_2 \begin{cases}
+            H_0 : \mu_1 - \mu_2 = 0 \\
+            H_1 : \mu_1 - \mu_2 \neq 0
+        \end{cases}$$
+
+$$C_3 \begin{cases}
+            H_0 : \mu_3 - \mu_4 = 0 \\
+            H_1 : \mu_3 - \mu_4 \neq 0
+        \end{cases}$$
+        
+        
+Para cada $c_i$, calcular a estatística de teste
+
+$$t_0 = \frac{\sum_{i=1}^ac_i\bar{y}_{i.}}{\frac{QM_{res}}{n}\sum_{i=1}^ac_i^2}$$
+
+```{r q17, echo=F}
+
+medias <- df2 %>%
+  group_by(potencia) %>%
+  summarize(media = mean(obs))
+
+c1 <- as.numeric(medias[1,2]) + as.numeric(medias[2,2]) - as.numeric(medias[3,2]) - as.numeric(medias[4,2])
+
+c2 <- as.numeric(medias[1,2]) - as.numeric(medias[2,2])
+
+c3 <- as.numeric(medias[3,2]) - as.numeric(medias[4,2])
+
+# (...)
+
+
 
 ```
 
 
-### 1.4) Qual sua conclusão sobre os resultados encontrados?
+### 1.8) Calcule a probabilidade do erro tipo II para:
+$$\mu_1 = 575;\\ \mu_2 = 600;\\ \mu_3 = 650;\\ \mu_4 = 675;  \ e \\ \sigma = 25.$$
+
+$$\begin{cases}
+Erro \ tipo \ I  &: P(Rejeitar \ H_0         &| H_0 \ verdadeira)\\
+Erro \ tipo \ II &: P(Não \ rejeitar \ H_0 \ &| H_0 \ falso)\\
+\end{cases}$$
+
+
+
+```{r Q18, echo=F}
+
+
+
+```
+
+
+### 1.9) Qual deve ser o número de repetições no experimento para que o erro seja menor que 0.01%?
+
+```{r q19,echo=F}
+
+
+
+```
+
+
