@@ -121,5 +121,19 @@ sigma2 <- 1.82 # QMRes
 
 delta <- 5*sum(taui^2)/sigma2
 
+a <- 4
+N <- 13
+n <- 5
+
 fcrit <- qf(1-alpha,4-1,(4-1)*(4-1))
+fcrit <- qf(1-alpha,a-1,N-a)
+
+beta <- pf(fcrit,df1=a-1,df2=a*n-a,ncp=delta)
+poder <- 1-beta
+poder
+
+
+
+
+
 

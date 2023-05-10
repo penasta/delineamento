@@ -109,3 +109,74 @@ TukeyHSD(anova)
 # P(Não rejeitar H0|h0 falsa)
 # ~ 0.53
 
+alpha <- .05
+#taui <- unique(df$media_tratamento) - unique(df$media_geral)
+taui <- c(-5,0,0,0,5)
+
+sigma2 <- QMres
+
+a <- 5
+b <- 3
+
+delta <- b*sum(taui^2/sigma2)
+fcrit <- qf(1-alpha,GLtrat,(a-1)*(b-1))
+#fcrit <- qf(1-alpha,a-1,N-a)
+
+beta <- pf(fcrit,df1=GLtrat,df2=(a-1)*(b-1),ncp=delta)
+beta
+poder <- 1-beta
+poder
+
+# ---- 1.7)
+
+# Mudando o b
+
+# b = 4
+b <- 4
+
+delta <- b*sum(taui^2/sigma2)
+fcrit <- qf(1-alpha,GLtrat,(a-1)*(b-1))
+#fcrit <- qf(1-alpha,a-1,N-a)
+
+beta <- pf(fcrit,df1=GLtrat,df2=(a-1)*(b-1),ncp=delta)
+beta
+poder <- 1-beta
+poder
+
+#b = 5
+b <- 5
+
+delta <- b*sum(taui^2/sigma2)
+fcrit <- qf(1-alpha,GLtrat,(a-1)*(b-1))
+#fcrit <- qf(1-alpha,a-1,N-a)
+
+beta <- pf(fcrit,df1=GLtrat,df2=(a-1)*(b-1),ncp=delta)
+beta
+poder <- 1-beta
+poder
+
+#b = 6
+b <- 6
+
+delta <- b*sum(taui^2/sigma2)
+fcrit <- qf(1-alpha,GLtrat,(a-1)*(b-1))
+#fcrit <- qf(1-alpha,a-1,N-a)
+
+beta <- pf(fcrit,df1=GLtrat,df2=(a-1)*(b-1),ncp=delta)
+beta
+poder <- 1-beta
+poder
+
+#b = 7
+b <- 7
+
+delta <- b*sum(taui^2/sigma2)
+fcrit <- qf(1-alpha,GLtrat,(a-1)*(b-1))
+#fcrit <- qf(1-alpha,a-1,N-a)
+
+beta <- pf(fcrit,df1=GLtrat,df2=(a-1)*(b-1),ncp=delta)
+beta
+poder <- 1-beta
+poder
+
+# Portanto, para chegar a > 95% de poder, é necessário ao menos 7 blocos.
