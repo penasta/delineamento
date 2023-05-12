@@ -9,6 +9,8 @@ summary(anova)
 
 pacman::p_load(tidyverse)
 
+# ----
+
 media_bloco <- df %>%
   select(dados,bloco) %>% 
   group_by(bloco) %>%
@@ -62,6 +64,7 @@ pvalor <- c(pvalortrat,pvalorb,"","")
 
 ANOVA <- data.frame(fonte,SQ,GL,QM,valorf,pvalor)
 ANOVA
+#-----
 
 summary(anova)
 
@@ -79,13 +82,15 @@ qqline(df$residuo)
 
 #Homocedasticidade:
 bartlett.test(df$dados ~ df$tratamento)
+pacman::p_load(lawstat)
+levene.test(df$dados,df$tratamento)
 
 pacman::p_load(asbio)
 tukey.add.test(dados,tratamento,bloco) # regressão/regressão
 
-mod <- lm(dados ~ tratamento + bloco)
-ad <- (predict(mod))^2
-modad <- lm(dados ~ tratamento + bloco + ad)
+#mod <- lm(dados ~ tratamento + bloco)
+#ad <- (predict(mod))^2
+#modad <- lm(dados ~ tratamento + bloco + ad)
 #plot(TukeyHSD(anova))
 #bartlett.test(df$residuo)
 #plot(df$residuo)
