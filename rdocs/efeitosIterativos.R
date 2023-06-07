@@ -150,17 +150,23 @@ SQA <- df %>% # ta errado esse
 anova <- aov(dados ~ temperatura*material)
 summary(anova)
 
-
-
 interaction.plot(temperatura,material,dados)
 
+# Tamanho da amostra
 
+npca <- (b*n*sum(unique(df$taui)^2))/675
+ncpb <- (a*n*sum(unique(df$betaj)^2))/675
+ncpab <- (n*sum(unique(df$tauibetaj)^2))/675
 
+pchisq(39119/675,2,ncp=0)
+pchisq(10684/675,2,ncp=0)
 
+anova2 <- aov(dados ~ temperatura+material)
+summary(anova2)
 
+anova(anova,anova2)
 
-
-
+# --------------------------------------------------------------------------- #
 
 p_load(effectsize)
 options(es.use_symbols = TRUE)
@@ -171,3 +177,21 @@ epsilon_squared(anova)
 cohens_f(anova)
 cohens_f_squared(anova)
 #eta_squared_posterior(anova)
+
+# --------------------------------------------------------------------------- #
+
+obs <- c(-3,-1,-1,0,-1,1,0,1,0,2,1,1,2,6,3,5,5,7,4,6,7,10,9,11)
+
+n <- 2
+a<-3
+b<-2
+c<-2
+
+fatA<-factor(rep(c("10","12","14"),each=b*c*n))
+fatB<-factor(rep(rep(c("25","30"),each=c*n),a))
+fatC<-factor(rep(rep(c("200","250"),n),a*c))
+
+dados <- data.frame(obs,fatA,fatB,fatC)
+
+anova <- aov(obs ~ fatA*fatB*fatC)
+summary(anova)
