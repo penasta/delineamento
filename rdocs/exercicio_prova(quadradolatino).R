@@ -1,5 +1,6 @@
 # 1.0) ----
 # Dados
+
 dados <- c(83,77,80,83,85,
            80,85,85,81,79,
            82,97,76,84,76,
@@ -27,42 +28,50 @@ df <- data.frame(dados,estudante,livro,musica)
 anova <- aov(dados ~ estudante+livro+musica)
 summary(anova)
 
-  # 1.3) ----
+
+model= lm(dados ~ estudante+livro+musica)
+
+shapiro.test(model$residuals)
+  
+# 1.3) ----
 # Pressupostos:
 
 # Normalidade:
+
 qqnorm(anova$residuals)
 qqline(anova$residuals)
 shapiro.test(anova$residuals)
 
-# Homocedasticidade:
-bartlett.test(dados ~ livro)
 
+# Homocedasticidade:
+
+bartlett.test(dados ~ livro)
 bartlett.test(dados ~ estudante)
 bartlett.test(dados ~ musica)
 
 # Independência:
+
 plot(anova$residuals,anova$fitted.values)
 
 # Aditividade:
+
 aditividade <- lm(dados ~ estudante+livro+musica)
-v_adt <- (predict(aditividade))^2
+v_adt <- predict(aditividade)^2
 modelo <- lm(dados ~ estudante+livro+musica+v_adt)
 
 anova2 <- anova(aditividade,modelo)
 anova2
 
-pacman::p_load(additivityTests)
-tukey.test(df)
-
 # 1.4) ----
 # Estimativa dos parâmetros:
 # mu = 
+
 mu <- mean(dados)
 mu
 
 # alpha_i (linha)
 pacman::p_load(tidyverse)
+
 df %>%
   select(dados,estudante) %>%
   group_by(estudante) %>%
@@ -74,7 +83,9 @@ df %>%
   group_by(livro) %>%
   summarize(média = mean(dados)-mu)
 
-# beta_k (coluna)
+
+
+#beta_k (coluna)
 df %>%
   select(dados,musica) %>%
   group_by(musica) %>%
