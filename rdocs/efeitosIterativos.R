@@ -10,8 +10,7 @@ temperatura <- rep(factor(c(15,15,70,70,125,125)),6)
 
 df <- data.frame(dados,material,temperatura)
 
-library(pacman)
-p_load(tidyverse)
+pacman::p_load(tidyverse)
 
 mppp <- mean(dados)
 
@@ -154,7 +153,7 @@ interaction.plot(temperatura,material,dados)
 
 # Tamanho da amostra
 
-npca <- (b*n*sum(unique(df$taui)^2))/675
+ncpa <- (b*n*sum(unique(df$taui)^2))/675
 ncpb <- (a*n*sum(unique(df$betaj)^2))/675
 ncpab <- (n*sum(unique(df$tauibetaj)^2))/675
 
@@ -167,8 +166,8 @@ summary(anova2)
 anova(anova,anova2)
 
 # --------------------------------------------------------------------------- #
-
-p_load(effectsize)
+# testes:
+pacman::p_load(effectsize)
 options(es.use_symbols = TRUE)
 
 eta_squared(anova)
