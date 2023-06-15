@@ -52,7 +52,6 @@ shapiro.test(anova$residuals)
 #leveneTest(anova$residuals ~ trat)
 
 bartlett.test(dados ~ trat)
-boxplot(dados ~ trat)
 
 # Checar a homogeneidade em linhas e colunas também
 
@@ -80,14 +79,13 @@ tukey.add.test(dados,col,row)
 # Modelo inteiro:
 aditividade <- lm(dados ~ trat+col+row)
 
-v_adt <- (predict(aditividade))^2
+v_adt <- predict(aditividade)^2
 
 modelo <- lm(dados ~ trat+col+row+v_adt)
 
 # Verificando
 anova2 <- anova(aditividade,modelo)
-
-# tá dando pau
+anova2
 
 # 1.4) Estimativa dos parâmetros ----
 
@@ -111,6 +109,7 @@ SQT <- sum(summary(anova)[[1]][,2])
 # 1.6) Existe diferença? Tukey. ----
 
 TukeyHSD(anova)
+boxplot(dados ~ trat)
 
 # --------------------------------------------------------------------------- #
 
@@ -162,7 +161,6 @@ summary(anova)
 # resíduos pelos valores ajustados
 plot(anova$residuals,anova$fitted.values)
 
-
 # Normalidade:
 qqnorm(anova$residuals)
 qqline(anova$residuals)
@@ -175,7 +173,6 @@ shapiro.test(anova$residuals)
 #leveneTest(anova$residuals ~ trat)
 
 bartlett.test(dados ~ trat)
-boxplot(dados ~ trat)
 
 # Checar a homogeneidade em linhas e colunas também
 
@@ -203,7 +200,7 @@ tukey.add.test(dados,col,row)
 # Modelo inteiro:
 aditividade <- lm(dados ~ trat+col+row)
 
-v_adt <- (predict(aditividade))^2
+v_adt <- predict(aditividade)^2
 
 modelo <- lm(dados ~ trat+col+row+v_adt)
 
@@ -233,3 +230,4 @@ SQT <- sum(summary(anova)[[1]][,2])
 # 1.6) Existe diferença? Tukey. ----
 
 TukeyHSD(anova)
+boxplot(dados ~ trat)
