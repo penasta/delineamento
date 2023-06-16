@@ -28,11 +28,6 @@ df <- data.frame(dados,estudante,livro,musica)
 anova <- aov(dados ~ estudante+livro+musica)
 summary(anova)
 
-
-model= lm(dados ~ estudante+livro+musica)
-
-shapiro.test(model$residuals)
-  
 # 1.3) ----
 # Pressupostos:
 
