@@ -46,10 +46,13 @@ shapiro.test(anova2$residuals)
 bartlett.test(anova2$residuals ~ fata)
 bartlett.test(anova2$residuals ~ fatb)
 bartlett.test(anova2$residuals ~ bloco)
+bartlett.test(anova2$residuals ~ c(fatb,fatb))
+
 
 pacman::p_load(car)
 leveneTest(anova2$residuals ~ fata)
 leveneTest(anova2$residuals ~ fatb)
+leveneTest(anova2$residuals ~ c(fatb,fatb))
 leveneTest(anova2$residuals ~ bloco)
 
 # Independencia
