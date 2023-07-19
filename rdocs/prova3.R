@@ -16,7 +16,7 @@ summary(anova)
 shapiro.test(anova$residuals)
 
 # Homocedasticidade
-leveneTest(dados~fata)
+leveneTest(dados~fata) # usei só os de levene na prova
 leveneTest(dados~fatb)
 leveneTest(dados~bloco)
 leveneTest(dados~fata:fatb)
@@ -49,10 +49,10 @@ fatb <- factor(rep(rep(c("M","P"),each=6),3))
 bloco <- factor(rep(c("I","II","III","IV","V","VI"),6))
 df <- data.frame(dados,fata,fatb,bloco)
 
-anova <- aov(dados~fata*fatb+bloco)
+anova <- aov(dados~fata*fatb+bloco) # usei esse pra pegar os resíduos pros pressupostos
 summary(anova)
 
-anova2 <- aov(dados~fata*fatb+Error(bloco/fata))
+anova2 <- aov(dados~fata*fatb+Error(bloco/fata)) # usei esse na prova
 summary(anova2)
 
 shapiro.test(anova$residuals)
